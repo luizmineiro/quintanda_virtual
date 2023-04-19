@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:quitanda_virtual/src/config/custom_colors.dart';
+import 'package:quitanda_virtual/src/home/components/category_tile.dart';
 
-class HomeTab extends StatelessWidget {
+class HomeTab extends StatefulWidget {
   const HomeTab({Key? key}) : super(key: key);
+
+  @override
+  State<HomeTab> createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> {
+  List<String> categorias = [
+    'Frutas',
+    'Grãos',
+    'Verduras',
+    'Temperos',
+    'Cereais',
+  ];
+
+  String selectedCategory = 'Frutas';
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +73,6 @@ class HomeTab extends StatelessWidget {
       body: Column(
         children: [
           //* Campo de pesquisa
-
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 20,
@@ -92,6 +107,26 @@ class HomeTab extends StatelessWidget {
           ),
 
           //* Categorias
+          Container(
+            padding: const EdgeInsets.only(left: 25),
+            height: 40,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return CategoryTile(
+                  onPressed: () {
+                    setState(() {
+                      selectedCategory = categorias[index];
+                    });
+                  },
+                  category: categorias[index],
+                  isSelected: categorias[index] == selectedCategory,
+                );
+              },
+              separatorBuilder: (context, index) => const SizedBox(width: 10),
+              itemCount: categorias.length,
+            ),
+          ),
 
           //* Grid
         ],
