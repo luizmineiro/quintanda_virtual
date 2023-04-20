@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quitanda_virtual/src/auth/sing_in_screen.dart';
-import 'package:quitanda_virtual/src/auth/sing_up_screen.dart';
+import 'package:quitanda_virtual/src/pages/auth/sing_in_screen.dart';
+import 'package:quitanda_virtual/src/pages/auth/sing_up_screen.dart';
 
 void main() {
   runApp(const MyApp());
