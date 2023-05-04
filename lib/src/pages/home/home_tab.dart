@@ -1,5 +1,7 @@
+// ignore_for_file: library_prefixes
+
 import 'package:flutter/material.dart';
-import 'package:quitanda_virtual/src/config/app_data.dart';
+import 'package:quitanda_virtual/src/config/app_data.dart' as appData;
 import 'package:quitanda_virtual/src/config/custom_colors.dart';
 import 'package:quitanda_virtual/src/pages/home/components/category_tile.dart';
 
@@ -11,7 +13,6 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-
   String selectedCategory = 'Frutas';
 
   @override
@@ -110,19 +111,37 @@ class _HomeTabState extends State<HomeTab> {
                 return CategoryTile(
                   onPressed: () {
                     setState(() {
-                      selectedCategory = categorias[index];
+                      selectedCategory = appData.categorias[index];
                     });
                   },
-                  category: categorias[index],
-                  isSelected: categorias[index] == selectedCategory,
+                  category: appData.categorias[index],
+                  isSelected: appData.categorias[index] == selectedCategory,
                 );
               },
               separatorBuilder: (context, index) => const SizedBox(width: 10),
-              itemCount: categorias.length,
+              itemCount: appData.categorias.length,
             ),
           ),
 
           //* Grid
+          Expanded(
+            child: GridView.builder(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              physics: const BouncingScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 9 / 11.5,
+              ),
+              itemCount: appData.items.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  color: Colors.red,
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
